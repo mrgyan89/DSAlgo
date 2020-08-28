@@ -1,6 +1,6 @@
 package com.linkedlist;
 
-/* This program shows, how we can create our own linked list in JAVA with list of
+/* This program shows, how we can create our own single linked list in JAVA with list of
  * operations like add, delete, traverse, search etc.
  */
 
@@ -23,14 +23,17 @@ public class MyLinkedList<E> {
 	 */
 	private Node<E> last;
 	private Node<E> tmp;
+	private int size;
 
 	public void add(E data) {
 		if (start == null) {
 			start = new Node<E>(data, null);
+			size++;
 			last = start;
 			return;
 		}
 		last.next = new Node<E>(data, null);
+		size++;
 		last = last.next;
 	}
 
@@ -43,6 +46,7 @@ public class MyLinkedList<E> {
 		if (start != null && start.data.equals(data)) {
 			isDeleted = true;
 			start = start.next;
+			size--;
 			return isDeleted;
 		}
 		tmp = start;
@@ -50,6 +54,7 @@ public class MyLinkedList<E> {
 			if (tmp.next != null && tmp.next.data.equals(data)) {
 				isDeleted = true;
 				tmp.next = tmp.next.next;
+				size--;
 				break;
 			}
 			tmp = tmp.next;
@@ -65,6 +70,10 @@ public class MyLinkedList<E> {
 		}
 	}
 
+	public int size() {
+		return size;
+	}
+
 	public static void main(String[] args) {
 		MyLinkedList<Integer> list = new MyLinkedList<Integer>();
 		list.add(1);
@@ -72,9 +81,11 @@ public class MyLinkedList<E> {
 		list.add(3);
 		list.add(4);
 		list.add(5);
+		System.out.print("Linked list size:"+list.size()+"\n");
 		list.traverse();
 		boolean isDeleted = list.delete(4);
-		System.out.println("\nIs item 4 deleted:" + isDeleted);
+		System.out.print("\nIs item 4 deleted:" + isDeleted);
+		System.out.print("\nLinked list size:"+list.size()+"\n");
 		list.add(6);
 		list.traverse();
 	}
