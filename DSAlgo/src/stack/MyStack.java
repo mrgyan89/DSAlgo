@@ -1,5 +1,9 @@
 package stack;
 
+/* This program shows, how we can create our own stack data structure in JAVA
+ * and here in this implementation, I have used fixed size array to store data 
+ * but we can also implement stack using doubly linked list with dynamic size
+ */
 public class MyStack<E> {
 	private Object[] stack;
 	private int top = -1;
@@ -21,13 +25,15 @@ public class MyStack<E> {
 			throw new IllegalArgumentException("Stack is empty");
 		}
 		Object item = stack[top];
-		if (item != null) {
-			stack[top] = null;
-			top--;
-		}
+		stack[top] = null;
+		top--;
 		return (E) item;
 	}
 
+	/*
+	 * print stack elements from top to down, in LIFO order as per stack's
+	 * behaviours
+	 */
 	public void traverse() {
 		for (int i = stack.length - 1; i > -1; i--) {
 			if (stack[i] != null) {
@@ -60,7 +66,9 @@ public class MyStack<E> {
 		System.out.print("Total items in Stack: " + mystack.size() + "\n");
 		System.out.println("Poped item from stack: " + mystack.pop());
 		System.out.print("Total items in Stack: " + mystack.size() + "\n");
+		mystack.traverse();
 		mystack.push(6);
+		System.out.print("Total items in Stack: " + mystack.size() + "\n");
 		mystack.traverse();
 
 	}
